@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, SafeAreaView, TextInput } from 'react-native';
-import { Button, Content, Icon} from "native-base";
+import { Button} from "native-base";
 
 class App extends Component {
   constructor(props) {
@@ -37,10 +37,7 @@ class App extends Component {
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
-            <Text style={{width: '100%', borderBottomWidth: 1, padding: 5}}>{data}
-            <Icon type="FontAwesome" name="home" />
-
-            </Text>
+            <Text style={{width: '100%', borderBottomWidth: 1, padding: 5}}>{data}</Text>
           )}
         </View>
       </SafeAreaView>
