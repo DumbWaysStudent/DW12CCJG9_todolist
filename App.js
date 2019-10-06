@@ -34,9 +34,7 @@ class App extends Component {
     for (let i = 0; i < this.state.todoListItems.length; i++) {
       if (this.state.todoListItems[i].id == (id)) {
         this.setState((state) => {
-          const list = state.todoListItems.splice(i, 1)
-
-          return list
+          return state.todoListItems.splice(i, 1)
         })
       }
     }
