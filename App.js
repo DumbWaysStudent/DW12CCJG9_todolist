@@ -27,7 +27,6 @@ class App extends Component {
 
       return {list, value: ''}
     })
-    console.log(this.state.todoListItems)
     this.setState({value: ''})
   }
 
@@ -36,10 +35,9 @@ class App extends Component {
       if (this.state.todoListItems[i].id == (id)) {
         this.setState((state) => {
           const list = state.todoListItems.splice(i, 1)
-          
+
           return list
         })
-        console.log(this.state.todoListItems)
       }
     }
   }
