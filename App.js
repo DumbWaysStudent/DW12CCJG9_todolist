@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import { View, Text, SafeAreaView, TextInput, FlatList } from 'react-native';
-import { Button, Icon} from "native-base";
+import { Button } from "native-base";
+import Icon from "react-native-vector-icons/Ionicons";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       todoListItems: [
-        'Work',
-        'Swim',
-        'Study',
-        'Sleep',
-        'run'
+        {id:1, name:'Work'},
+        {id:2, name:'run'},
+        {id:3, name:'play'},
+        {id: 4, name:'swim'}
       ],
       value: ''
     }
   }
 
   addTodoList() {
-    this.state.todoListItems.push(this.state.value);
+    let currId = this.state.todoListItems.length;
+    this.state.todoListItems.push({
+      id: currId + 1,
+      name: this.state.value
+    });
+    console.log(this.state.todoListItems)
     this.setState({value: ''})
+  }
+
+  deleteTodoList(id) {
+    this.state.todoListItems.splice(1, 1);
+    console.log(this.state.todoListItems, id)
   }
 
   render() {
@@ -37,8 +47,10 @@ class App extends Component {
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
-            <Text style={{width: '100%', borderBottomWidth: 1, padding: 5}}>{data}
-             <Icon type="FontAwesome" name="home" /></Text>
+            <View style={{width: '100%', borderBottomWidth: 1, padding: 5, flexDirection: 'row'}}>
+              <Text style={{flex: 8, paddingVertical: 10}}>{data.name}</Text>
+              <Button onPress={() => this.deleteTodoList(data.id)} style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="md-trash" size={20} color="red" /></Button>
+            </View>
           )}
         </View>
       </SafeAreaView>
