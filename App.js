@@ -8,10 +8,10 @@ class App extends Component {
     super(props);
     this.state = {
       todoListItems: [
-        {id:1, name:'Work'},
-        {id:2, name:'run'},
-        {id:3, name:'play'},
-        {id: 4, name:'swim'}
+        {id: 1, name: 'Work'},
+        {id: 2, name: 'run'},
+        {id: 3, name: 'play'},
+        {id: 4, name: 'swim'}
       ],
       value: ''
     }
@@ -50,14 +50,21 @@ class App extends Component {
           value = {this.state.value}
           />
           <Button light
-          style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
-          onPress ={() => this.addTodoList()}><Text>Add</Text></Button>
+            style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
+            onPress ={() => this.addTodoList()}
+          >
+            <Text>Add</Text>
+          </Button>
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
             <View style={{width: '100%', borderBottomWidth: 1, padding: 5, flexDirection: 'row'}}>
               <Text style={{flex: 8, paddingVertical: 10}}>{data.name}</Text>
-              <Button onPress={() => this.deleteTodoList(data.id)} style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="md-trash" size={20} color="red" /></Button>
+              <Button
+                style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}
+                onPress={() => this.deleteTodoList(data.id)} 
+              >
+                <Icon name="md-trash" size={20} color="red" /></Button>
             </View>
           )}
         </View>
