@@ -19,17 +19,29 @@ class App extends Component {
 
   addTodoList() {
     let currId = this.state.todoListItems.length;
-    this.state.todoListItems.push({
-      id: currId + 1,
-      name: this.state.value
-    });
+    this.setState((state) => {
+      const list = state.todoListItems.push({
+        id: currId + 1,
+        name: this.state.value
+      })
+
+      return {list, value: ''}
+    })
     console.log(this.state.todoListItems)
     this.setState({value: ''})
   }
 
   deleteTodoList(id) {
-    this.state.todoListItems.splice(1, 1);
-    console.log(this.state.todoListItems, id)
+    for (let i = 0; i < this.state.todoListItems.length; i++) {
+      if (this.state.todoListItems[i].id == (id)) {
+        this.setState((state) => {
+          const list = state.todoListItems.splice(i, 1)
+          
+          return list
+        })
+        console.log(this.state.todoListItems)
+      }
+    }
   }
 
   render() {
