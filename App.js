@@ -69,7 +69,7 @@ class App extends Component {
           />
           <Button light
           style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
-          onPress ={() => this.addTodoList()}><Text>Add</Text></Button>
+          onPress ={() => this.addTodoList()}><Text>Add </Text></Button>
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
