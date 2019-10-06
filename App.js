@@ -20,7 +20,7 @@ class App extends Component {
   addTodoList() {
     let currId = this.state.todoListItems.length;
     this.setState((state) => {
-      const list = state.todoListItems.push({
+      let list = state.todoListItems.push({
         id: currId + 1,
         name: this.state.value
       })
