@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, SafeAreaView, TextInput, CheckBox } from 'react-native';
 import { Button } from "native-base";
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 class App extends Component {
   constructor(props) {
@@ -13,21 +13,31 @@ class App extends Component {
         {id:3, name:'play', done: false},
         {id: 4, name:'swim', done: false}
       ],
-      value: ''
+      value: '',
+      btnTitle: 'Add',
+      currentEditItem: 0
     }
   }
 
-  addTodoList() {
-    let currId = this.state.todoListItems.length;
-    this.setState((state) => {
+  addTodoList(action) {
+    if (action == 'Add') {
+      let currId = this.state.todoListItems.length
+      this.setState((state) => {
       const list = state.todoListItems.push({
         id: currId + 1,
         name: this.state.value
       })
 
       return {list, value: ''}
-    })
-    this.setState({value: ''})
+      })
+
+      this.setState({value: ''})
+    } else if (action == 'Edit') {
+      this.setState((state) => {
+        return state.todoListItems[state.currentEditItem].name = state.value
+      })
+      this.setState({value: '', btnTitle: 'Add'})
+    }
   }
 
   deleteTodoList(id) {
@@ -45,17 +55,18 @@ class App extends Component {
   doneTodoList(id) {
     if (this.state.todoListItems[id - 1].done == false) {
       this.setState((state) => {
-        const list = state.todoListItems[id - 1].done = true
-  
-        return list
+        return state.todoListItems[id - 1].done = true
       })
     } else {
       this.setState((state) => {
-        const list = state.todoListItems[id - 1].done = false
-  
-        return list
+        return state.todoListItems[id - 1].done = false
       })
     }
+  }
+
+  editTodo(id, name) {
+    this.setState({value: name, btnTitle: 'Edit'})
+    this.setState({currentEditItem: (id - 1)})
   }
 
   render() {
@@ -69,7 +80,7 @@ class App extends Component {
           />
           <Button light
           style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
-          onPress ={() => this.addTodoList()}><Text>Add</Text></Button>
+          onPress ={() => this.addTodoList(this.state.btnTitle)}><Text>{this.state.btnTitle}</Text></Button>
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
@@ -80,7 +91,8 @@ class App extends Component {
               />
 
               <Text style={{flex: 8, paddingVertical: 10}}>{data.name}</Text>
-              <Button onPress={() => this.deleteTodoList(data.id)} style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="md-trash" size={20} color="red" /></Button>
+              <Button onPress={() => this.editTodo(data.id, data.name)} style={{paddingHorizontal: 10, marginRight: 5, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="pencil-alt" size={20} color="green" /></Button>
+              <Button onPress={() => this.deleteTodoList(data.id)} style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="trash-alt" size={20} color="red" /></Button>
             </View>
           )}
         </View>
