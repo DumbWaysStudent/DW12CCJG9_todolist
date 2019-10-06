@@ -20,7 +20,7 @@ class App extends Component {
   addTodoList() {
     let currId = this.state.todoListItems.length;
     this.setState((state) => {
-      const list = state.todoListItems.push({
+      let list = state.todoListItems.push({
         id: currId + 1,
         name: this.state.value
       })
@@ -34,9 +34,7 @@ class App extends Component {
     for (let i = 0; i < this.state.todoListItems.length; i++) {
       if (this.state.todoListItems[i].id == (id)) {
         this.setState((state) => {
-          const list = state.todoListItems.splice(i, 1)
-
-          return list
+          return state.todoListItems.splice(i, 1)
         })
       }
     }
@@ -45,15 +43,11 @@ class App extends Component {
   doneTodoList(id) {
     if (this.state.todoListItems[id - 1].done == false) {
       this.setState((state) => {
-        const list = state.todoListItems[id - 1].done = true
-  
-        return list
+        return state.todoListItems[id - 1].done = true
       })
     } else {
       this.setState((state) => {
-        const list = state.todoListItems[id - 1].done = false
-  
-        return list
+        return state.todoListItems[id - 1].done = false
       })
     }
   }
