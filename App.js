@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, TextInput, FlatList } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, CheckBox } from 'react-native';
 import { Button } from "native-base";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -8,10 +8,10 @@ class App extends Component {
     super(props);
     this.state = {
       todoListItems: [
-        {id:1, name:'Work'},
-        {id:2, name:'run'},
-        {id:3, name:'play'},
-        {id: 4, name:'swim'}
+        {id:1, name:'Work', done: false},
+        {id:2, name:'run', done: false},
+        {id:3, name:'play', done: false},
+        {id: 4, name:'swim', done: false}
       ],
       value: ''
     }
@@ -42,6 +42,22 @@ class App extends Component {
     }
   }
 
+  doneTodoList(id) {
+    if (this.state.todoListItems[id - 1].done == false) {
+      this.setState((state) => {
+        const list = state.todoListItems[id - 1].done = true
+  
+        return list
+      })
+    } else {
+      this.setState((state) => {
+        const list = state.todoListItems[id - 1].done = false
+  
+        return list
+      })
+    }
+  }
+
   render() {
     return (
       <SafeAreaView>
@@ -58,6 +74,11 @@ class App extends Component {
         <View>
           {this.state.todoListItems.map((data) =>
             <View style={{width: '100%', borderBottomWidth: 1, padding: 5, flexDirection: 'row'}}>
+              <CheckBox
+                value={data.done}
+                onValueChange={() => this.doneTodoList(data.id)}
+              />
+
               <Text style={{flex: 8, paddingVertical: 10}}>{data.name}</Text>
               <Button onPress={() => this.deleteTodoList(data.id)} style={{paddingHorizontal: 10, backgroundColor: "none", borderWidth: 1, borderColor: 'grey'}}><Icon name="md-trash" size={20} color="red" /></Button>
             </View>
