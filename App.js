@@ -27,13 +27,16 @@ class App extends Component {
       <SafeAreaView>
         <View style={{flexDirection: 'row', margin: 5}}>
           <TextInput
-          style={{flex: 1, borderWidth: 1, marginRight: 5, borderColor: 'gray', borderRadius: 3}}
-          onChangeText = {(text) => this.setState({value: text})}
-          value = {this.state.value}
+            style={{flex: 1, borderWidth: 1, marginRight: 5, borderColor: 'gray', borderRadius: 3}}
+            onChangeText = {(text) => this.setState({value: text})}
+            value = {this.state.value}
           />
           <Button light
-          style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
-          onPress ={() => this.addTodoList()}><Text>Add</Text></Button>
+            style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
+            onPress ={() => this.addTodoList()}
+          >
+            <Text>Add</Text>
+          </Button>
         </View>
         <View>
           {this.state.todoListItems.map((data) =>
