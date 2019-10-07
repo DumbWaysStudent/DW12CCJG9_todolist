@@ -67,7 +67,7 @@ class App extends Component {
           <TextInput
             style={{flex: 1, borderWidth: 1, marginRight: 5, borderColor: 'gray', borderRadius: 3}}
             onChangeText = {(text) => this.setState({value: text})}
-            onPress={() => this.deleteTodoList(data.id)}  value = {this.state.value}
+            value = {this.state.value}
           />
           <Button light
             style={{borderRadius: 5, fontWeight: 'bold', padding: 10, height: 50, borderWidth: 1, borderColor: 'gray'}}
