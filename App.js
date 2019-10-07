@@ -21,7 +21,8 @@ class App extends Component {
     let currId = this.state.todoListItems.length,
     newItems = [{
       id: currId + 1,
-      name: this.state.value
+      name: this.state.value,
+      done: false
     }]
 
     this.setState({todoListItems: [...this.state.todoListItems, ...newItems]});
@@ -34,14 +35,15 @@ class App extends Component {
     })})
   }
 
-  doneTodoList(id) {  
-    if (this.state.todoListItems[id - 1].done == false) {
+  doneTodoList(id) { 
+    let index = this.state.todoListItems.findIndex((x) => x.id == id );
+    if (this.state.todoListItems[index].done == false) {
       this.setState((state) => {
-        return state.todoListItems[id - 1].done = true
+        return state.todoListItems[index].done = true
       })
     } else {
       this.setState((state) => {
-        return state.todoListItems[id - 1].done = false
+        return state.todoListItems[index].done = false
       })
     }
   }
