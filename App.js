@@ -18,15 +18,13 @@ class App extends Component {
   }
 
   addTodoList() {
-    let currId = this.state.todoListItems.length;
-    this.setState((state) => {
-      let list = state.todoListItems.push({
-        id: currId + 1,
-        name: this.state.value
-      })
+    let currId = this.state.todoListItems.length,
+    newItems = [{
+      id: currId + 1,
+      name: this.state.value
+    }]
 
-      return {list, value: ''}
-    })
+    this.setState({todoListItems: [...this.state.todoListItems, ...newItems]});
     this.setState({value: ''})
   }
 
