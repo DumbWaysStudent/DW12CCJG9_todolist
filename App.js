@@ -15,7 +15,8 @@ class App extends Component {
       ],
       value: '',
       btnTitle: 'Add',
-      currentEditItem: 0
+      currentEditItem: 0,
+      currentEditItemName: ''
     }
   }
 
@@ -24,14 +25,18 @@ class App extends Component {
       let currId = this.state.todoListItems.length,
       newItems = [{
         id: currId + 1,
-        name: this.state.value
+        name: this.state.value,
+        done: false
       }]
 
       this.setState({todoListItems: [...this.state.todoListItems, ...newItems]});
       this.setState({value: ''})
     } else if (action == 'Edit') {
+      let name = this.state.currentEditItemName
+      let index = this.state.todoListItems.findIndex((x) => x.name == name )
+      console.log(index)
       this.setState((state) => {
-        return state.todoListItems[state.currentEditItem].name = state.value
+        return state.todoListItems[index].name = state.value
       })
       this.setState({value: '', btnTitle: 'Add'})
     }
@@ -43,20 +48,21 @@ class App extends Component {
     })})
   }
 
-  doneTodoList(id) {  
-    if (this.state.todoListItems[id - 1].done == false) {
+  doneTodoList(id) { 
+    let index = this.state.todoListItems.findIndex((x) => x.id == id );
+    if (this.state.todoListItems[index].done == false) {
       this.setState((state) => {
-        return state.todoListItems[id - 1].done = true
+        return state.todoListItems[index].done = true
       })
     } else {
       this.setState((state) => {
-        return state.todoListItems[id - 1].done = false
+        return state.todoListItems[index].done = false
       })
     }
   }
 
   editTodo(id, name) {
-    this.setState({value: name, btnTitle: 'Edit'})
+    this.setState({value: name, btnTitle: 'Edit', currentEditItemName: name})
     this.setState({currentEditItem: (id - 1)})
   }
 
