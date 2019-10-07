@@ -21,16 +21,13 @@ class App extends Component {
 
   addTodoList(action) {
     if (action == 'Add') {
-      let currId = this.state.todoListItems.length
-      this.setState((state) => {
-      let list = state.todoListItems.push({
+      let currId = this.state.todoListItems.length,
+      newItems = [{
         id: currId + 1,
         name: this.state.value
-      })
+      }]
 
-      return {list, value: ''}
-      })
-
+      this.setState({todoListItems: [...this.state.todoListItems, ...newItems]});
       this.setState({value: ''})
     } else if (action == 'Edit') {
       this.setState((state) => {
