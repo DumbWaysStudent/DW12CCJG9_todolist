@@ -29,13 +29,9 @@ class App extends Component {
   }
 
   deleteTodoList(id) {
-    for (let i = 0; i < this.state.todoListItems.length; i++) {
-      if (this.state.todoListItems[i].id == (id)) {
-        this.setState((state) => {
-          return state.todoListItems.splice(i, 1)
-        })
-      }
-    }
+    this.setState({todoListItems: this.state.todoListItems.filter((items) => {
+      return items.id != id
+    })})
   }
 
   render() {
