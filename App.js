@@ -21,7 +21,8 @@ class App extends Component {
     let currId = this.state.todoListItems.length,
     newItems = [{
       id: currId + 1,
-      name: this.state.value
+      name: this.state.value,
+      done: false
     }]
 
     this.setState({todoListItems: [...this.state.todoListItems, ...newItems]});
